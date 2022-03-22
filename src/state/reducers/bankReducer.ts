@@ -1,31 +1,15 @@
-const initalstate = 0;
+import { ActionType } from "../../action-types";
+import { Action } from "../../actions";
 
-// caseによっては型が異なるため、
-// type Action = {
-//   type: string;
-//   payload?: number;
-// };
-type DepositAction = {
-  type: "deposit";
-  payload: number;
-};
-type WithdrawAction = {
-  type: "withdraw";
-  payload: number;
-};
-type BankruptAction = {
-  type: "bankrupt";
-};
-// actionにはpayloadが含まれない場合があるため、
-type Action = DepositAction | WithdrawAction | BankruptAction;
+const initalstate = 0;
 
 const reducer = (state: number = initalstate, action: Action) => {
   switch (action.type) {
-    case "deposit":
+    case ActionType.DEPOSIT:
       return state + action.payload;
-    case "withdraw":
-      return state + action.payload;
-    case "bankrupt":
+    case ActionType.WITHDRAW:
+      return state - action.payload;
+    case ActionType.BANKRUPT:
       return 0;
     default:
       return state;
